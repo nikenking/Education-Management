@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主页</title>
+</head>
+<link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css"
+      th:href="@{/css/bootstrap.css}"/>
+<script type="text/javascript" src="#" th:src="@{/js/myScript1.js}"></script>
+<script type="text/javascript" src="#" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<style type="text/css">
+</style>
+<body th:inline="text" onload="betterBack()"
+      th:style="'background-image:'+ 'url(/img/mainBack.jpg)'+';background-position:center top;background-attachment: fixed;'">
+<div th:replace="emps/parts::#top_bar"></div>
+<div class="container" id="left_bar" style="margin-top: 40px">
+    <div class="row clearfix">
+        <div class="col-md-12 column" style="padding: 0;margin-bottom: 20px">
+            <div class="row clearfix" style="margin:0">
+                <div class="col-md-1 row" style="margin: 0;padding: 0;">
+                    <select class="btn btn-danger" id="classChoose" onchange="change()">
+                        <option th:text="${cl}" th:each="cl:${classes}" th:selected="${session.classChoose eq cl}?ture:false">
+                            17202
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-1 row" style="margin: 0;padding: 0;">
+                    <select class="btn btn-danger" id="sortChoose" onchange="change()">
+                        <option th:value="0" th:selected="${session.sort eq 0}?true:false">
+                            按学号升序
+                        </option>
+                        <option th:value="1" th:selected="${session.sort eq 1}?true:false">
+                            按学号降序
+                        </option>
+                        <option th:value="2" th:selected="${session.sort eq 2}?true:false">
+                            按成绩降序
+                        </option>
+                        <option th:value="3" th:selected="${session.sort eq 3}?true:false">
+                            按成绩升序
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-5 column" style="margin-left: 40px;padding: 0;">
+                    <form class="navbar-form navbar-left" role="search" action="/t_main/search" method="post"
+                          id="search_form" style=" margin: 0; padding: 0;">
+                        <div class="form-group">
+                            <input type="text" name="search_val" id="search_box" class="form-control"/>
+                        </div>
+                        <button type="button" id="search_triger" class="btn-danger btn btn-default" onclick="search()">
+                            查找
+                        </button>
+                    </form>
+                </div>
+                <div class="col-md-4 row" style="padding: 0;margin: 0">
+                    <form th:action="@{/UserExcelDownloads}" method="post">
+                        <button class="btn btn-danger" style="float: right" type="submit" >导出成绩</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 column" style="padding: 0;">
+            <div class="row clearfix" style="margin: 0;padding: 0;">
+                <div class="col-md-12 row" style="/* margin-left: 30px; */margin: 0;padding: 0;">
+                    <table class="table">
+                        <thead>
+                        <tr class="warning">
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>成绩</th>
+                            <th>性别</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success" th:each="s:${student}">
+                            <td th:text="${s.getsId()}"></td>
+                            <td th:text="${s.getsName()}"></td>
+                            <td th:text="${s.getOneScore()}">17203</td>
+                            <td th:text="${s.getsGender() eq 0?'女':'男'}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer no-margin-top">
+                        <ul class="pagination pull-right no-margin">
+                            <!-- 首页 -->
+                            <li>
+                                <a href="/t_main">首页</a>
+                            </li>
+
+                            <!-- 上一页 -->
+                            <li>
+                                <a th:href="@{/t_main/}+${page-1}" th:if="${page}>1">上一页</a>
+                            </li>
+
+                            <!-- 中间页 -->
+                            <li>
+                                <a th:text="${page}"></a>
+                            </li>
+
+                            <!-- 下一页 -->
+                            <li>
+                                <a th:href="@{/t_main/}+${page+1}" th:if="${page lt maxPage}">下一页</a>
+                            </li>
+
+                            <!-- 尾页 -->
+                            <li>
+                                <a th:href="@{/t_main/}+${maxPage}">尾页</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form th:action="@{/t_main/change}" id="subForm" hidden="hidden">
+    <input th:value="${session.classChoose}" id="subBox" name="classChoice"/>
+    <input th:value="${session.sort}" id="subBox2" name="sort"/>
+</form>
+</body>
+<script th:inline="javascript">
+    if ([[${not #strings.isEmpty(show_msg)}]]) {
+        alert([[${show_msg}]]);
+    }
+    function change() {
+        var classChoose = document.getElementById("classChoose");
+        var sortChoose = document.getElementById("sortChoose");
+        var subbox = document.getElementById("subBox");
+        var subbox2 = document.getElementById("subBox2");
+        subbox.value = classChoose.value;
+        subbox2.value = sortChoose.value;
+        document.getElementById("subForm").submit();
+    }
+    function search() {
+        var val = document.getElementById('search_box').value;
+        var box = document.getElementById("search_form");
+        if (val !== "") {
+            box.submit();
+        }
+    }
+
+</script>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主页</title>
+</head>
+<link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css"
+      th:href="@{/css/bootstrap.css}"/>
+<script type="text/javascript" src="#" th:src="@{/js/myScript1.js}"></script>
+<script type="text/javascript" src="#" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+
+<body th:inline="text"
+      th:style="'background-image:'+ 'url(/img/mainBack.jpg)'+';background-position:center top;background-attachment: fixed;'">
+<div th:replace="emps/parts::#top_bar"></div>
+<div class="container" id="left_bar" style="margin-top: 40px">
+    <div class="row clearfix">
+        <div th:replace="emps/parts::#left_bar(show='teacher')"></div>
+        <div class="col-md-10 column" id="studentList" style="width: 964px;margin-top: -18px;">
+            <div class="container">
+                <div class="row clearfix">
+                    <div class="col-md-6 column">
+                        <h3 style="margin: 0;">
+                            创世纪学生管理系统
+                            <a th:href="@{/addTeacher.html}">
+                                <button style="margin-left: 10px" class="btn btn-sm btn-success">教师添加</button>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="col-md-6 column">
+                        <form class="navbar-form navbar-left" role="search" action="/t_search" method="post"
+                              id="search_form">
+                            <div class="form-group">
+                                <input type="text" name="search_val" id="search_box" class="form-control"/>
+                            </div>
+                            <button type="button" id="search_triger" class="success btn btn-default" onclick="search()">
+                                查找
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        教师号
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th>
+                        性别
+                    </th>
+                    <th>
+                        教授课程
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="success" th:each="tc:${teachers}">
+                    <td th:text="${tc.gettId()}"></td>
+                    <td th:text="${tc.gettName()}"></td>
+                    <td th:text="${tc.gettGender()}==0?'女':'男'"></td>
+                    <td th:text="${tc.getCourseName()}"></td>
+                    <td>
+                        <a th:href="@{/changeTeacher/}+${tc.gettId()}">
+                            <button class="btn btn-sm btn-primary">编辑</button>
+                        </a>
+                        <a th:href="@{/delTeacher/}+${tc.gettId()}" onclick="return confirm('确定删除?');">
+                            <button th:attr="myClass=@{/delTeacher/}+${tc.gettId()}" class="btn btn-sm btn-danger">册除
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer no-margin-top">
+                <ul class="pagination pull-right no-margin">
+                    <!-- 首页 -->
+                    <li>
+                        <a href="/t/1">首页</a>
+                    </li>
+
+                    <!-- 上一页 -->
+                    <li>
+                        <a th:href="@{/t/}+${page-1}" th:if="${page}>1">上一页</a>
+                    </li>
+
+                    <!-- 中间页 -->
+                    <li>
+                        <a th:text="${page}"></a>
+                    </li>
+
+                    <!-- 下一页 -->
+                    <li>
+                        <a th:href="@{/t/}+${page+1}" th:if="${page lt maxPage}">下一页</a>
+                    </li>
+
+                    <!-- 尾页 -->
+                    <li>
+                        <a th:href="@{/t/}+${maxPage}">尾页</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    if ([[${not #strings.isEmpty(show_msg)}]]){
+        alert([[${show_msg}]]);
+    }
+
+    function search() {
+        var val = document.getElementById('search_box').value;
+        var box = document.getElementById("search_form");
+        if (val !== "") {
+            box.submit();
+        }
+    }
+</script>
+</html>

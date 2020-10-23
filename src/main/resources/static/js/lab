@@ -1,0 +1,24 @@
+        <div class="col-md-12 column" style="padding: 0;">
+            <div class="row clearfix" style="margin: 0;padding: 0;">
+                <div class="col-md-12 row" style="/* margin-left: 30px; */margin: 0;padding: 0;">
+                    <table class="table">
+                        <thead>
+                        <tr class="warning">
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>成绩</th>
+                            <th>性别</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success">
+                            <td th:text="${student.getsId()}"></td>
+                            <td th:text="${student.getsName()}"></td>
+                            <td th:text="${student.getsClassId()}">17203</td>
+                            <td th:text="${student.getsGender() eq 0?'女':'男'}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

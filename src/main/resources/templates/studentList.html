@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主页</title>
+</head>
+<link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css"
+      th:href="@{/css/bootstrap.css}"/>
+<script type="text/javascript" src="#" th:src="@{/js/myScript.js}"></script>
+<body onload="changetrs()" th:inline="text"
+      th:style="'background-image:'+ 'url(/img/mainBack.jpg)'+';background-position:center top;background-attachment: fixed;'">
+<div th:replace="/emps/fragments::#topbar(Highlight='studentList')"></div>
+<!--学生列表-->
+<div class="col-md-10 column" id="studentList" style="width: 964px;margin-top: -18px;">
+    <h3>
+        创世纪学生管理系统<a href="/addStudent.html">
+        <button style="margin-left: 10px" class="btn btn-sm btn-success">学生添加</button>
+    </a></h3>
+    <!--            <div th:replace="bar/topbar::#topbar"></div>-->
+    <table class="table">
+        <thead>
+        <tr class="warning">
+            <th>
+                学号
+            </th>
+            <th>
+                姓名
+            </th>
+            <th>
+                班级
+            </th>
+            <th>
+                性别
+            </th>
+            <th>
+                入学时间
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="success">
+            <td>1001</td>
+            <td>E-AA</td>
+            <td>D-AA</td>
+            <td>男</td>
+            <td>2019/09/13</td>
+            <td>
+                <a href="/changeStudent/1001">
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                </a>
+                <a href="/delStudent/1001">
+                    <button myClass="http://localhost:8080/delStudent/1001" class="btn btn-sm btn-danger">册除</button>
+                </a>
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>1002</td>
+            <td>E-BB</td>
+            <td>D-BB</td>
+            <td>男</td>
+            <td>2018/09/13</td>
+            <td>
+                <a href="/changeStudent/1002">
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                </a>
+                <a href="/delStudent/1002">
+                    <button class="btn btn-sm btn-danger">册除</button>
+                </a>
+            </td>
+        </tr>
+        <tr class="success">
+            <td>1003</td>
+            <td>E-CC</td>
+            <td>D-CC</td>
+            <td>女</td>
+            <td>2017/09/13</td>
+            <td>
+                <a href="/changeStudent/1003">
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                </a>
+                <a href="/delStudent/1003">
+                    <button class="btn btn-sm btn-danger">册除</button>
+                </a>
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>1004</td>
+            <td>E-DD</td>
+            <td>D-DD</td>
+            <td>女</td>
+            <td>2019/09/12</td>
+            <td>
+                <a href="/changeStudent/1004">
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                </a>
+                <a href="/delStudent/1004">
+                    <button class="btn btn-sm btn-danger">册除</button>
+                </a>
+            </td>
+        </tr>
+        <tr class="success">
+            <td>1005</td>
+            <td>E-EE</td>
+            <td>D-EE</td>
+            <td>男</td>
+            <td>2018/09/01</td>
+            <td>
+                <a href="/changeStudent/1005">
+                    <button class="btn btn-sm btn-primary">编辑</button>
+                </a>
+                <a id="test" href="/delStudent/1005">
+                    <button class="btn btn-sm btn-danger">册除</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

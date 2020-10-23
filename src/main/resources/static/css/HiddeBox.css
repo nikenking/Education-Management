@@ -1,0 +1,82 @@
+#hidebg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #000;
+    width: 100%;
+    /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+    filter: alpha(opacity=60);
+    /*设置透明度为60%*/
+    opacity: 0.6;
+    /*非IE浏览器下设置透明度为60%*/
+    display: none;
+    /* http://www.jb51.net */
+    z-Index: 2;
+}
+
+#hidebox {
+    position: fixed;
+    _position: absolute;
+    margin: 0;
+    width: 400px;
+    height: 192px;
+    top: 40%;
+    left: 40%;
+    background-color: #fff;
+    display: none;
+    cursor: pointer;
+    z-Index: 3;
+    text-align: center;
+}
+
+#content {
+    text-align: center;
+    cursor: pointer;
+    z-Index: 1;
+}
+
+.box-head {
+    font-size: 18px;
+    padding-top: 18px;
+    padding-bottom: 10px;
+}
+
+.box-textarea {
+    font-size: 14px;
+    padding-top: 30px;
+    padding-bottom: 32px;
+}
+
+.hidebox-hr {
+    width: 384px;
+    text-align: center;
+    /* padding: 0; */
+    padding-left: 8px;
+}
+
+.clickbtn {
+    display: block;
+    width: 107px;
+    height: 33px;
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+.cancel {
+    background-color: #ededed;
+    float: left;
+    margin-left: 88px;
+}
+
+.confirm {
+    background-color: #00aed8;
+    color: #ffffff;
+    float: left;
+    margin-left: 22px;
+}
+
+.boxbtn {
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
+}

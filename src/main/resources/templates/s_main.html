@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主页</title>
+</head>
+<link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css"
+      th:href="@{/css/bootstrap.css}"/>
+<script type="text/javascript" src="#" th:src="@{/js/myScript1.js}"></script>
+<script type="text/javascript" src="#" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<style type="text/css">
+</style>
+<body th:inline="text" onload="betterBack()"
+      th:style="'background-image:'+ 'url(/img/mainBack.jpg)'+';background-position:center top;background-attachment: fixed;'">
+<div th:replace="emps/parts::#top_bar"></div>
+<div class="container" id="left_bar" style="margin-top: 40px">
+    <div class="row clearfix">
+        <div th:replace="emps/parts::#left_bar_s(show='student')"></div>
+        <div class="col-md-10 column">
+            <div class="row clearfix" style="margin: 0;">
+                <div class="col-md-11 row" style="margin-left: 30px;">
+                    <table class="table">
+                        <thead>
+                        <tr class="warning">
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>班级</th>
+                            <th>性别</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success">
+                            <td th:text="${student.getsId()}"></td>
+                            <td th:text="${student.getsName()}"></td>
+                            <td th:text="${student.getsClassId()}">17203</td>
+                            <td th:text="${student.getsGender() eq 0?'女':'男'}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    if ([[${not #strings.isEmpty(show_msg)}]]) {
+        alert([[${show_msg}]]);
+    }
+</script>
+</html>

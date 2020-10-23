@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>登录吧</title>
+</head>
+<link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css"
+      th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}"/>
+<script type="text/javascript" src="#" th:src="@{/js/loginCheck.js}"></script>
+<style type="text/css">
+    .row-fluid {
+        margin-top: 20px;
+    }
+</style>
+<body th:inline="text"
+      th:style="'background-image:'+ 'url(/img/loginBack.jpg)'+';background-position:center top;background-attachment: fixed;'">
+<div class="container-fluid" style="margin-top: 10%;width: 30%;" th:inline="text">
+    <div class="row-fluid">
+        <div class="span12" style="text-align: center;">
+            <img alt="140x140" src="/img/loginico2.jpg" th:src="@{/img/loginicon.jpg}" style="border-radius: 10px;"/>
+            <h3 class="text-center" th:text="#{login.tip}" style="margin-top: 20px;color: #DFF0D8; font-size: 20px">
+                欢迎来到创世纪登录界面
+            </h3>
+            <p style="color: red" id="ErrorMsg" th:text="${ErrorMsg}" th:if="${not #strings.isEmpty(ErrorMsg)}"></p>
+            <div class="row-fluid">
+                <form action="login.html" th:action="@{/loginCheck}" method="post" id="subform">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <input class="form-control" type="text" name="uname" onmouseover="hiddenError()"
+                                   th:placeholder="#{login.account}" onkeypress="getKey(event)" placeholder="请输入账号"/>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <input class="form-control" type="password" name="upass" onmouseover="hiddenError()"
+                                   th:placeholder="#{login.password}" onkeypress="getKey(event)" placeholder="请输入密码"/>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <fieldset>
+                                <label class="checkbox"><input type="checkbox"/> [[#{login.remenber}]]</label><br/>
+                                <button type="button" onclick="subCheck()" class="btn" style="background: #0076FF;"
+                                        th:text="#{login.btn}">登录
+                                </button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row-fluid" style="margin-top: 30%;">
+                <div class="span12">
+                    <form>
+                        <a href="#" th:href="@{/login(l='zc_CN')}">
+                            <span>中文</span></a><span> |  </span><a href="#"
+                                                                   th:href="@{/login(l='en_US')}"><span>english</span></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function getKey(event) {
+        if(event.keyCode===13){
+            subCheck();
+        }
+    }
+</script>
+</html>

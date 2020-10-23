@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>模块组件</title>
+</head>
+<body>
+<script src="@{/js/scrollwindow.js}"></script>
+<script src="@{/js/myScript.js}"></script>
+<!--顶部导航栏-->
+<div class="container" id="top_bar" style="background-color: rgb(51, 116, 189)">
+    <div class="row clearfix">
+        <div class="col-md-9 column">
+            <h2 style="color: white;">
+                创世纪管理系统
+            </h2>
+        </div>
+        <div class="col-md-3 column" style="line-height: 65px;">
+            <span style="color: white;">当前用户：</span>
+            <span style="color: red;" th:text="${not #strings.isEmpty(session.root)}?
+                            ${session.root}:${not #strings.isEmpty(session.tId)?session.tId:session.sId}"></span>
+            <a href="/exit" style="margin-left: 10px;color: white;" onclick="return confirm('是否退出?')">退出</a>
+        </div>
+    </div>
+</div>
+<!--侧面导航栏-->
+<div class="col-md-2 column" style="margin-right: 10px;" id="left_bar">
+    <div class="list-group">
+        <a href="#" th:href="@{/}" th:style="'color:'+${show=='student'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='student'?'►':'▼'}">▼</span>学生管理
+        </a>
+        <a href="#" th:href="@{/t/1}" th:style="'color:'+${show=='teacher'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='teacher'?'►':'▼'}">►</span>教师管理
+        </a>
+        <a href="#" th:href="@{/cl/1}" th:style="'color:'+${show=='class'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='class'?'►':'▼'}">►</span>班级管理
+        </a>
+        <a href="#" th:href="@{/cs/1}" th:style="'color:'+${show=='course'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='course'?'►':'▼'}">►</span>课程管理
+        </a>
+    </div>
+</div>
+<!--学生权限侧面导航栏-->
+<div class="col-md-2 column" id="left_bar_s">
+    <div class="list-group">
+        <a href="#" th:href="@{/s}" th:style="'color:'+${show=='student'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='student'?'►':'▼'}">▼</span>学生信息
+        </a>
+        <a href="#" th:href="@{/s/score}" th:style="'color:'+${show=='score'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='score'?'►':'▼'}">►</span>成绩信息
+        </a>
+        <a href="#" th:href="@{/s/class}" th:style="'color:'+${show=='class'?'red':'rgb(86, 153, 192)'}"
+           class="list-group-item" style="color: rgb(86, 153, 192);">
+            <span class="badge" th:text="${show=='class'?'►':'▼'}">►</span>班级信息
+        </a>
+    </div>
+</div>
+</body>
+
+</html>
